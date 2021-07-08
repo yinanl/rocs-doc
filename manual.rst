@@ -37,7 +37,7 @@ The first step to solving a control synthesis problem is to create a C++ `main` 
 In the following sections, we will show you how to write each part.
 
 ..
-   .. literalinclude:: ../rocs/examples/car/carDBA.cpp
+   .. literalinclude:: ./examples/car/carDBA.cpp
 	  :language: cpp
 	  :lines: 16-
 
@@ -61,7 +61,7 @@ Consider the generalized Buechi specification :math:`\varphi_{\rm gb}=\Box\lozen
 
 The following structured text file is a transciption of the above DBA, which can be parsed by ROCS.
 
-.. literalinclude:: ../rocs/examples/scara/gb2.txt
+.. literalinclude:: ./examples/scara/gb2.txt
    :linenos:
 
 Lines 1-6 are the metadata. The keywords (case sensitive) ``Name``, ``AP``, ``acc``, ``nNodes``, ``nAP`` and ``init`` should be used to indicate the corresponding LTL formula, the atomic proposition, the accepting states, the number of DBA states, the number of atomic propositions, and the initial state, respectively. The order of presenting these information does not matter.
@@ -75,7 +75,7 @@ The binary encoding of a propositional formula projects the formula into a binar
 
 In the `main` program, read the sepcification file by using ``read_spec``:
 
-.. literalinclude:: ../rocs/examples/car/carDBA.cpp
+.. literalinclude:: ./examples/car/carDBA.cpp
    :language: cpp
    :lines: 64-69
    :linenos:
@@ -87,7 +87,7 @@ In the `main` program, read the sepcification file by using ``read_spec``:
    - call methods ``invariance_control`` and/or ``reachability_control`` of the class ``CSolver`` if the specification-guided engine is used. In this case, the *goal* and *avoid* areas in the state space of the system needs to be specified firstly by using the ``init`` method.
    - call methods ``invariance`` and/or ``reachability`` of the class ``DSolver`` if the abstraction-based engine is used. In this case, the user needs to prepare a set of goal states (of type ``std::vector<size_t>``) before using those methods.
 
-     
+
 
 Structure Your Dynamics
 -----------------------
@@ -98,7 +98,7 @@ The system dynamics can be written either
 
 Take the :ref:`mobile robot <sec_mobile>` problem in the :doc:`Case Studies <cases>` as an example, the vehicle dynamics is definded as a `struct` in the following header file `car.hpp`:
 
-.. literalinclude:: ../rocs/examples/car/car.hpp
+.. literalinclude:: ./examples/car/car.hpp
    :language: cpp
    :lines: 11-
    :linenos:
@@ -109,7 +109,7 @@ Take the :ref:`mobile robot <sec_mobile>` problem in the :doc:`Case Studies <cas
 In the `main` file, create a system object by using the ``carode`` `struct`:
 
 .. _code_dt:
-.. literalinclude:: ../rocs/examples/car/carDBA.cpp
+.. literalinclude:: ./examples/car/carDBA.cpp
    :language: cpp
    :lines: 87-97
    :linenos:
@@ -129,7 +129,7 @@ Typically, line 10 and 11, which initialize the state space and the set of sampl
 To handle continuous-time systems, high-order Taylor expansion is used to compute a validated reachable set after one sampling time for each cell in the system state partition, which is required by the control synthesis algorithms. The class ``flowTaylor`` is designed to compute validated reachable sets. Here is an example code for setting up a continuous-time system.
 
 .. _code_ct:
-.. literalinclude:: ../rocs/examples/vdp/roa.cpp
+.. literalinclude:: ./examples/vdp/roa.cpp
    :language: cpp
    :lines: 55-68
    :linenos:
@@ -147,7 +147,7 @@ Compared to :ref:`code_dt`, there are extra lines:
 
 .. note::
    The parameters used in :ref:`code_ct` work for many dynamical systems. You may need minor modifications, but it is not suggested to change them without using them for your system first.
-   
+
 
 
 Define the Labeling Function
@@ -159,7 +159,7 @@ If the *specification-guided engine* is to be used, then, first of all, we need 
 As a result, the labeling procedure needs to performed for all the ``CSolver`` objects by the member function ``labeling`` in the solver class ``CSolver``. Here is an example with the same mobile robot model:
 
 .. _code_label_csolver:
-.. literalinclude:: ../rocs/examples/car/carDBA.cpp
+.. literalinclude:: ./examples/car/carDBA.cpp
    :language: cpp
    :lines: 98-115,121-136
    :linenos:
@@ -179,7 +179,7 @@ Similarly, if the *abstraction-based engine* is to be used, then an abstraction 
 - line 9 constructs all the transitions between abstraction states,
 - line 18-35 assign different labels 4, 2, 1 to 3 rectangular goal areas, and the lambda function defined in line 22-34 serves as the labeling function.
 
-.. literalinclude:: ../rocs/examples/car/carAbst.cpp
+.. literalinclude:: ./examples/car/carAbst.cpp
    :language: cpp
    :lines: 86-88,115-125,139-160
    :linenos:
@@ -193,7 +193,7 @@ Perform Synthesis
 -----------------
 To perform the control synthesis algorihm with the *specification-guided engine*, the method ``dba_control`` should be used. Let us still look at the mobile robot example. The following line of code will perform the control synthesis w.r.t. the user-defined DBA specification for the mobile robot system.
 
-.. literalinclude:: ../rocs/examples/car/carDBA.cpp
+.. literalinclude:: ./examples/car/carDBA.cpp
    :language: cpp
    :lines: 144-145
    :linenos:
@@ -204,7 +204,7 @@ The input argument ``sdoms`` is a vector of pointers to the system state spaces 
 
 The input function ``init_w`` is the lambda function we defined earlier for labeling, and ``e`` is the partition precision specified by the user. The argument ``isacc`` is a vector of binaries of size ``nNodes``, which marks the accepting states. It can be obtained by using the ``acc`` after reading the specification file. Here is a code example:
 
-.. literalinclude:: ../rocs/examples/car/carDBA.cpp
+.. literalinclude:: ./examples/car/carDBA.cpp
    :language: cpp
    :lines: 72-74
    :linenos:
@@ -219,7 +219,7 @@ To use the *abstraction-based engine*, there will be 4 steps:
 
 Here is an example code (for the mobile robot model):
 
-.. literalinclude:: ../rocs/examples/car/carAbst.cpp
+.. literalinclude:: ./examples/car/carAbst.cpp
    :language: cpp
    :lines: 163-175
    :linenos:
@@ -244,7 +244,7 @@ The control strategy for each DBA state (or associated with each ``CSolver`` obj
 
 To save problem settings (such as system states, discretization precision) as well as the control strategies that are obtained by using the *abstraction-based engine* into `.h5` files, the user can refer to the following example code:
 
-.. literalinclude:: ../rocs/examples/car/carAbst.cpp
+.. literalinclude:: ./examples/car/carAbst.cpp
    :language: cpp
    :lines: 196-200
    :linenos:
