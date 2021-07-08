@@ -35,8 +35,8 @@ release = '2.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-subprocess.call('pip install sphinx-prompt', shell=True)
-subprocess.call('pip install breathe', shell=True)
+# subprocess.call('pip install sphinx-prompt', shell=True)
+# subprocess.call('pip install breathe', shell=True)
 extensions = [
     'sphinx-prompt',
     'sphinx.ext.autodoc',
