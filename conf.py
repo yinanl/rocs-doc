@@ -15,9 +15,9 @@ import os
 import sys
 from sphinx.builders.html import StandaloneHTMLBuilder
 import sphinx_rtd_theme
-
-sys.path.insert(0, os.path.abspath('./python/'))
-sys.path.insert(0, os.path.abspath('./src/'))
+sys.path.insert(0, os.path.abspath('./rocs/python/'))
+# sys.path.insert(0, os.path.abspath('./python/'))
+# sys.path.insert(0, os.path.abspath('./src/'))
 
 
 # -- Project information -----------------------------------------------------
@@ -51,8 +51,10 @@ extensions = [
 
 # Breathe configurations
 subprocess.call('make clean', shell=True)
-subprocess.call('cd ./doxygen ; doxygen', shell=True)
-breathe_projects = { "ROCS": "./doxygen/xml/" }
+subprocess.call('cd ./rocs/doc/ ; doxygen', shell=True)
+breathe_projects = { "ROCS": "./rocs/doc/xml/" }
+# subprocess.call('cd ./doxygen ; doxygen', shell=True)
+# breathe_projects = { "ROCS": "./doxygen/xml/" }
 breathe_default_project = "ROCS"
 
 # Add any paths that contain templates here, relative to this directory.
