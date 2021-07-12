@@ -35,6 +35,7 @@ C++ Reference
 .. doxygenclass:: rocs::flowTaylor
    :members:
 
+
 .. doxygenclass:: rocs::CSolver
    :members:
 
@@ -45,6 +46,13 @@ C++ Reference
 
 .. doxygenclass:: rocs::DSolver
    :members:
+
+
+.. doxygenclass:: rocs::DBAparser
+   :members:
+
+.. doxygenfunction:: rocs::read_spec
+
 
 .. doxygenclass:: rocs::h5FileHandler
    :members:

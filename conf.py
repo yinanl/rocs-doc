@@ -39,6 +39,7 @@ release = '2.0'
 # subprocess.call('pip install breathe', shell=True)
 extensions = [
     'sphinx-prompt',
+    'breathe',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.mathjax',
@@ -46,7 +47,7 @@ extensions = [
     # 'sphinx.ext.imgmath',
     'sphinx.ext.todo',
     'sphinx.ext.napoleon',
-    'breathe'
+    'sphinx.ext.graphviz'
 ]
 
 # Breathe configurations

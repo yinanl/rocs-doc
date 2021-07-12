@@ -42,6 +42,8 @@ In the following sections, we will show you how to write each part.
 	  :lines: 16-
 
 
+.. _sec_spec_file:
+
 Structure Your Specification
 ----------------------------
 To perform control synthesis w.r.t. a DBA specification, a structured file describing the DBA is required currently. An acceptable specification file should contain
@@ -86,7 +88,6 @@ In the `main` program, read the sepcification file by using ``read_spec``:
 
    - call methods ``invariance_control`` and/or ``reachability_control`` of the class ``CSolver`` if the specification-guided engine is used. In this case, the *goal* and *avoid* areas in the state space of the system needs to be specified firstly by using the ``init`` method.
    - call methods ``invariance`` and/or ``reachability`` of the class ``DSolver`` if the abstraction-based engine is used. In this case, the user needs to prepare a set of goal states (of type ``std::vector<size_t>``) before using those methods.
-
 
 
 Structure Your Dynamics
