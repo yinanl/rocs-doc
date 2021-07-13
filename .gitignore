@@ -1,2 +1,8 @@
-
+# ignore changes to the submodule
 rocs
+
+# ignore local build
+_build
+
+# ignore .DS_Store
+.DS_Store

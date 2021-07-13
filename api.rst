@@ -48,11 +48,10 @@ C++ Reference
    :members:
 
 
-..
-   .. doxygenclass:: rocs::DBAparser
-	  :members:
+.. doxygenclass:: rocs::DBAparser
+   :members:
 
-   .. doxygenfunction:: rocs::read_spec
+.. doxygenfunction:: rocs::read_spec
 
 
 .. doxygenclass:: rocs::h5FileHandler
